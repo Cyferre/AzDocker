@@ -7,6 +7,8 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Microsoft.Azure.WebJobs.Host;
+
 
 namespace AzDocker
 {
@@ -26,8 +28,10 @@ namespace AzDocker
             name = name ?? data?.name;
 
             return name != null
-                ? (ActionResult)new OkObjectResult($"Hello, {name}")
+                ? (ActionResult)new OkObjectResult($"Hello, {name}" + Environment.NewLine +$"The current time is {DateTime.Now}. Hopefully you will have a great day!")
                 : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
         }
+
+        
     }
 }
